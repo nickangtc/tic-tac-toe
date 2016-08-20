@@ -25,12 +25,12 @@ h1 {
   /*line-height: 170px;
   font-size: 90px;*/
 }
-.x-symbol {
+.x {
   background-image: url("../imgs/x-sym.png");
   background-position: center;
   background-size: cover;
 }
-.o-symbol {
+.o {
   background-image: url("../imgs/o-sym.png");
   background-position: center;
   background-size: cover;

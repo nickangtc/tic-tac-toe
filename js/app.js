@@ -41,6 +41,18 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   var gameStarted = false;
   var round = 1;
+  var boardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  var boxNum = {
+    box1: 1,
+    box2: 2,
+    box3: 3,
+    box4: 4,
+    box5: 5,
+    box6: 6,
+    box7: 7,
+    box8: 8,
+    box9: 9
+  };
 
 
   function startGame () {
@@ -70,12 +82,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (gameStarted && document.getElementById(boxId).classList.length === 1) {
       if (whoseTurn() === "X") {
         console.log("tile changed to X bg");
-        document.getElementById(boxId).classList.add("x-symbol");
+        document.getElementById(boxId).classList.add("x");
+        boardArray[boxNum[boxId] - 1] = "X";
+        console.log(boardArray);
       }
       else if (whoseTurn() === "O") {
         console.log("tile changed to O bg");
         // document.getElementById(boxId).setAttribute("class", "o-symbol");
-        document.getElementById(boxId).classList.add("o-symbol");
+        document.getElementById(boxId).classList.add("o");
+        boardArray[boxNum[boxId] - 1] = "O";
+        console.log(boardArray);
       }
       // document.getElementById(boxId).textContent = whoseTurn();
       round++;
@@ -88,6 +104,47 @@ document.addEventListener('DOMContentLoaded', function() {
     if (round === 10) {
       console.log("it's a draw match");
       alert("And... it's a draw. Click Reset and Start for a rematch!");
+    }
+    else {
+      // CHECK ROW 1
+      if (boardArray[0] === boardArray[1] && boardArray[0] === boardArray[2]) {
+        console.log("1st row win");
+      }
+      // CHECK ROW 2
+      if (boardArray[3] === boardArray[4] && boardArray[3] === boardArray[5]) {
+        console.log("2nd row win");
+      }
+      // CHECK ROW 3
+      if (boardArray[6] === boardArray[7] && boardArray[6] === boardArray[8]) {
+        console.log("3rd row win");
+      }
+      // CHECK COL 1
+      if (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6]) {
+        console.log("1st col win");
+      }
+      // CHECK COL 2
+      if (boardArray[1] === boardArray[4] && boardArray[1] === boardArray[7]) {
+        console.log("2nd col win");
+      }
+      // CHECK COL 3
+      if (boardArray[2] === boardArray[5] && boardArray[2] === boardArray[8]) {
+        console.log("3rd col win");
+      }
+      // CHECK DIAG \
+      if (boardArray[0] === boardArray[4] && boardArray[0] === boardArray[8]) {
+        console.log("\\ diag win");
+      }
+      // CHECK DIAG /
+      if (boardArray[2] === boardArray[4] && boardArray[2] === boardArray[6]) {
+        console.log("/ diag win");
+      }
+    }
+  }
+
+  // total 8 possible winning combinations
+  function validateRow() {
+    for (var i = 0; i < 3; i++) {
+
     }
   }
 
