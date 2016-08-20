@@ -1,3 +1,33 @@
+body {
+  background-color: #7CC6FE;
+  text-align: center;
+  color: #08090A;
+}
 h1 {
-  color: purple;
+  margin-top: 40px;
+  color: #08090A;
+}
+
+.board {
+  margin: 20px auto;
+}
+.box {
+  display: inline-block;
+  background-color: #F4FAFF;
+  width: 170px;
+  height: 170px;
+  border: 1px black solid;
+  margin-left: -1px;
+  margin-right: -1px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  line-height: 170px;
+  border-radius: 2px;
+}
+
+#start-button {
+  width: 120px;
+}
+#reset-button {
+  width: 60px;
 }
