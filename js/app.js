@@ -66,14 +66,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function makeMove(boxId) {
     console.log("inside makeMove function with " + boxId);
-    if (gameStarted === true) {
-      if (document.getElementById(boxId).value === undefined) {
-        document.getElementById(boxId).innerHTML = "<span>" + whoseTurn() + "</span>";
-        round++;
-        winOrLose();
+    console.log("class list of boxId " + document.getElementById(boxId).classList);
+    if (gameStarted && document.getElementById(boxId).classList.length === 1) {
+      if (whoseTurn() === "X") {
+        console.log("tile changed to X bg");
+        document.getElementById(boxId).classList.add("x-symbol");
       }
+      else if (whoseTurn() === "O") {
+        console.log("tile changed to O bg");
+        // document.getElementById(boxId).setAttribute("class", "o-symbol");
+        document.getElementById(boxId).classList.add("o-symbol");
+      }
+      // document.getElementById(boxId).textContent = whoseTurn();
+      round++;
+      winOrLose();
     }
   }
+
 
   function winOrLose() {
     if (round === 10) {
