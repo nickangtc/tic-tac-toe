@@ -173,22 +173,22 @@ document.addEventListener('DOMContentLoaded', function() {
       break;
 
       // CHECK COL 2
-      case (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6]):
+      case (boardArray[1] === boardArray[4] && boardArray[1] === boardArray[7]):
       alert(lastPlayer().name + " wins!");
       gameOver = true;
       break;
       // CHECK COL 3
-      case (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6]):
+      case (boardArray[2] === boardArray[5] && boardArray[2] === boardArray[8]):
       alert(lastPlayer().name + " wins!");
       gameOver = true;
       break;
       // CHECK DIAG \
-      case (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6]):
+      case (boardArray[0] === boardArray[4] && boardArray[0] === boardArray[8]):
       alert(lastPlayer().name + " wins!");
       gameOver = true;
       break;
       // CHECK DIAG /
-      case (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6]):
+      case (boardArray[2] === boardArray[4] && boardArray[2] === boardArray[6]):
       alert(lastPlayer().name + " wins!");
       gameOver = true;
       break;
