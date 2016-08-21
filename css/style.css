@@ -32,7 +32,7 @@ button:hover {
 }
 .box {
   display: inline-block;
-  background-color: white;
+  background-color: #CCDBDC;
   width: 150px;
   height: 150px;
   border: 1px #263D42 solid;
