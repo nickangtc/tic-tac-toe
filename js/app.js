@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.getElementById("start-button").addEventListener("click", startGame);
   document.getElementById("reset-button").addEventListener("click", resetGame);
+  document.getElementById("vsBlue").addEventListener("click", function() {
+    document.getElementById("show-turn").textContent = "Play against Blue, our AI. Click Start to begin!";
+  });
+  document.getElementById("2player").addEventListener("click", function() {
+    document.getElementById("show-turn").textContent = "Grab a friend, click Start to begin!";
+  });
 
   document.getElementById("box1").addEventListener("click", function () {
     makeMove("box1");
@@ -147,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (round === 10) {
       console.log("it's a draw match");
       alert("And... it's a draw. Click RESET and Start for a rematch!");
+      gameOver = true;
     }
     else {
       // CHECK ROW 1
