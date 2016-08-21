@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function updateTurnDisplay (player) {
-    document.getElementById("show-turn").innerHTML = player.name + ", it's your turn (" + player.symbol + ")";
+    document.getElementById("show-turn").innerHTML = player.name + ", your turn (" + player.symbol + ")";
     console.log("player name: " + player.name);
   }
 

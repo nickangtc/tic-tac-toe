@@ -1,11 +1,30 @@
 body {
-  background-color: #7CC6FE;
+  background-color: #63C7B2;
   text-align: center;
-  color: #08090A;
+  color: #263D42;
+  font-family: 'Merienda', cursive;
 }
 h1 {
   margin-top: 40px;
-  color: #08090A;
+  color: #263D42;
+}
+h3 {
+  margin-top: -10px;
+}
+button {
+  font-family: 'Merienda', cursive;
+  height: 40px;
+  border-radius: 3px;
+  border: 1px solid #263D42;
+  background-color: #CCDBDC;
+  color: #263D42;
+  font-size: 0.9em;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 10px;
+}
+button:hover {
+  background-color: #80CED7;
 }
 
 .board {
@@ -14,16 +33,17 @@ h1 {
 .box {
   display: inline-block;
   background-color: white;
-  width: 170px;
-  height: 170px;
-  border: 1px black solid;
+  width: 150px;
+  height: 150px;
+  border: 1px #263D42 solid;
   margin-left: 0;
   margin-right: 0;
   margin-top: 1px;
   margin-bottom: 1px;
   border-radius: 2px;
-  /*line-height: 170px;
-  font-size: 90px;*/
+}
+.box:hover {
+  background-color: #80CED7;
 }
 .x {
   background-image: url("../imgs/x-sym.png");
@@ -37,8 +57,8 @@ h1 {
 }
 
 #start-button {
-  width: 120px;
+  width: 140px;
 }
 #reset-button {
-  width: 60px;
+  width: 70px;
 }
