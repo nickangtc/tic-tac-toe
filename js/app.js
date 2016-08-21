@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     symbol: "X"
   };
   var gameStarted = false;
+  var gameOver = false;
   var round = 1;
   var boardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   var boxIndex = {
@@ -55,13 +56,33 @@ document.addEventListener('DOMContentLoaded', function() {
     box9: 9
   };
 
+  function checkMode() {
+    var len = document.getElementById("select-mode").children.length;
+    console.log("no. of radio buttons: " + len);
+    for (var i = 0; i < len; i++) {
+      console.log("checking which radio btn selected...");
+      if (document.getElementById("select-mode").children[i].checked) {
+        console.log("found mode selected: " + document.getElementById("select-mode").children[i].value);
+        return document.getElementById("select-mode").children[i].value;
+      }
+    }
+  }
 
   function startGame () {
     console.log("inside startGame function");
-    player1.name = prompt("What's your name? 'O' will be your symbol.");
-    player2.name = prompt("What's your name? 'X' will be your symbol.");
-    document.getElementById("show-turn").innerHTML = player1.name + ", you'll go first (" + player1.symbol + ")";
-    gameStarted = true;
+    var mode = checkMode();
+    if (mode === "2player") {
+      player1.name = prompt("What's your name? 'O' will be your symbol.");
+      player2.name = prompt("What's your name? 'X' will be your symbol.");
+      document.getElementById("show-turn").innerHTML = player1.name + ", you'll go first (" + player1.symbol + ")";
+      gameStarted = true;
+    }
+    else if (mode === "vsBlue") {
+      player1.name = prompt("What's your name? 'O' will be your symbol.");
+      player2.name = "Blue";
+      document.getElementById("show-turn").innerHTML = player1.name + ", you'll go first (" + player1.symbol + ")";
+      gameStarted = true;
+    }
   }
 
   function whoseTurn () {
@@ -75,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // RETURNS PLAYER WHO MADE THE LATEST MOVE
   function lastPlayer () {
     console.log("checking last player...");
     if (whoseTurn() === player2) {
@@ -90,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("player name: " + player.name);
   }
 
+  // FOR 2-PLAYER MODE ONLY
   function makeMove(boxId) {
     console.log("inside makeMove function with " + boxId);
     console.log("class list of boxId " + document.getElementById(boxId).classList);
@@ -100,6 +123,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById(boxId).classList.add("x");
         boardArray[boxIndex[boxId] - 1] = "X";
         console.log(boardArray);
+        round++;
+        winOrLose();
       }
       else if (whoseTurn().symbol === "O") {
         updateTurnDisplay(player2);
@@ -108,13 +133,15 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById(boxId).classList.add("o");
         boardArray[boxIndex[boxId] - 1] = "O";
         console.log(boardArray);
+        round++;
+        winOrLose();
       }
-      // document.getElementById(boxId).textContent = whoseTurn();
-      round++;
-      winOrLose();
+      // TO HAND CONTROL TO 1-PLAYER VS-BLUE MODE !!!
+      if (checkMode() === "vsBlue" && !gameOver) {
+        blueMove();
+      }
     }
   }
-
 
   function winOrLose() {
     if (round === 10) {
@@ -125,36 +152,48 @@ document.addEventListener('DOMContentLoaded', function() {
       // CHECK ROW 1
       if (boardArray[0] === boardArray[1] && boardArray[0] === boardArray[2]) {
         alert(lastPlayer().name + " wins!");
+        gameOver = true;
       }
       // CHECK ROW 2
       if (boardArray[3] === boardArray[4] && boardArray[3] === boardArray[5]) {
         alert(lastPlayer().name + " wins!");
+        gameOver = true;
       }
       // CHECK ROW 3
       if (boardArray[6] === boardArray[7] && boardArray[6] === boardArray[8]) {
         alert(lastPlayer().name + " wins!");
+        gameOver = true;
       }
       // CHECK COL 1
       if (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6]) {
         alert(lastPlayer().name + " wins!");
+        gameOver = true;
       }
       // CHECK COL 2
       if (boardArray[1] === boardArray[4] && boardArray[1] === boardArray[7]) {
         alert(lastPlayer().name + " wins!");
+        gameOver = true;
       }
       // CHECK COL 3
       if (boardArray[2] === boardArray[5] && boardArray[2] === boardArray[8]) {
         alert(lastPlayer().name + " wins!");
+        gameOver = true;
       }
       // CHECK DIAG \
       if (boardArray[0] === boardArray[4] && boardArray[0] === boardArray[8]) {
         alert(lastPlayer().name + " wins!");
+        gameOver = true;
       }
       // CHECK DIAG /
       if (boardArray[2] === boardArray[4] && boardArray[2] === boardArray[6]) {
         alert(lastPlayer().name + " wins!");
+        gameOver = true;
       }
     }
+  }
+
+  function stopGame () {
+
   }
 
   function resetGame () {
@@ -166,9 +205,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // RESET EVERYTHING TO START STATE
     gameStarted = false;
+    gameOver = false;
     round = 1;
     boardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     document.getElementById("show-turn").textContent = "Ready for a rematch?";
+  }
+
+  // THE BRAIN OF 'BLUE', THE COMPUTER OPPONENT
+  // FOR 1-PLAYER VS COMPUTER MODE
+  function blueMove () {
+    var randomInt = randomIntFromInterval(1,9); // generate random number 1-9
+    while (boardArray.includes(randomInt) === false) { // corresponding box must not be clicked before
+      randomInt = randomIntFromInterval(1,9);
+    }
+    var delay = randomIntFromInterval(1000, 3000); // 1-3 seconds to simulate Blue thinking
+    setTimeout(function() {
+      // Blue makes a random move.
+      if (boardArray.includes(randomInt)) {
+        var boxId = "box" + randomInt;
+        updateTurnDisplay(player1);
+        document.getElementById(boxId).classList.add("x");
+        boardArray[boxIndex[boxId] - 1] = "X";
+        round++;
+        winOrLose();
+      }
+    }, delay);
+  }
+
+  function randomIntFromInterval(min,max) {
+    return Math.floor(Math.random()*(max-min+1)+min);
   }
 
 });
