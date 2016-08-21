@@ -55,13 +55,30 @@ document.addEventListener('DOMContentLoaded', function() {
     box9: 9
   };
 
+  function checkMode() {
+    var len = document.getElementById("select-mode").children.length;
+    console.log("no. of radio buttons: " + len);
+    for (var i = 0; i < len; i++) {
+      console.log("checking which radio btn selected...");
+      if (document.getElementById("select-mode").children[i].checked) {
+        console.log("found mode selected: " + document.getElementById("select-mode").children[i].value);
+        return document.getElementById("select-mode").children[i].value;
+      }
+    }
+  }
 
   function startGame () {
     console.log("inside startGame function");
-    player1.name = prompt("What's your name? 'O' will be your symbol.");
-    player2.name = prompt("What's your name? 'X' will be your symbol.");
-    document.getElementById("show-turn").innerHTML = player1.name + ", you'll go first (" + player1.symbol + ")";
-    gameStarted = true;
+    var mode = checkMode();
+    if (mode === "2player") {
+      player1.name = prompt("What's your name? 'O' will be your symbol.");
+      player2.name = prompt("What's your name? 'X' will be your symbol.");
+      document.getElementById("show-turn").innerHTML = player1.name + ", you'll go first (" + player1.symbol + ")";
+      gameStarted = true;
+    }
+    else if (mode === "vsBlue") {
+      //code
+    }
   }
 
   function whoseTurn () {
