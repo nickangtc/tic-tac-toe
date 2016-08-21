@@ -171,4 +171,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("show-turn").textContent = "Ready for a rematch?";
   }
 
+  // THE BRAIN OF 'BLUE', THE COMPUTER OPPONENT
+  // FOR 1-PLAYER VS COMPUTER MODE
+  function blueMove () {
+
+  }
+
 });
