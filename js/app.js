@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // RETURNS PLAYER WHO MADE THE LATEST MOVE
   function lastPlayer () {
     console.log("checking last player...");
     if (whoseTurn() === player2) {
