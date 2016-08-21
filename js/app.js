@@ -150,57 +150,55 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function winOrLose() {
-    if (round === 10) {
+    switch (true) {
+      // CHECK ROW 1
+      case (boardArray[0] === boardArray[1] && boardArray[0] === boardArray[2]):
+      alert(lastPlayer().name + " wins!");
+      gameOver = true;
+      break;
+      // CHECK ROW 2
+      case (boardArray[3] === boardArray[4] && boardArray[3] === boardArray[5]):
+      alert(lastPlayer().name + " wins!");
+      gameOver = true;
+      break;
+      // CHECK ROW 3
+      case (boardArray[6] === boardArray[7] && boardArray[6] === boardArray[8]):
+      alert(lastPlayer().name + " wins!");
+      gameOver = true;
+      break;
+      // CHECK COL 1
+      case (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6]):
+      alert(lastPlayer().name + " wins!");
+      gameOver = true;
+      break;
+
+      // CHECK COL 2
+      case (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6]):
+      alert(lastPlayer().name + " wins!");
+      gameOver = true;
+      break;
+      // CHECK COL 3
+      case (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6]):
+      alert(lastPlayer().name + " wins!");
+      gameOver = true;
+      break;
+      // CHECK DIAG \
+      case (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6]):
+      alert(lastPlayer().name + " wins!");
+      gameOver = true;
+      break;
+      // CHECK DIAG /
+      case (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6]):
+      alert(lastPlayer().name + " wins!");
+      gameOver = true;
+      break;
+      // IF ROUND 10
+      case (round === 10):
       console.log("it's a draw match");
       alert("And... it's a draw. Click RESET and Start for a rematch!");
       gameOver = true;
+      break;
     }
-    else {
-      // CHECK ROW 1
-      if (boardArray[0] === boardArray[1] && boardArray[0] === boardArray[2]) {
-        alert(lastPlayer().name + " wins!");
-        gameOver = true;
-      }
-      // CHECK ROW 2
-      if (boardArray[3] === boardArray[4] && boardArray[3] === boardArray[5]) {
-        alert(lastPlayer().name + " wins!");
-        gameOver = true;
-      }
-      // CHECK ROW 3
-      if (boardArray[6] === boardArray[7] && boardArray[6] === boardArray[8]) {
-        alert(lastPlayer().name + " wins!");
-        gameOver = true;
-      }
-      // CHECK COL 1
-      if (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6]) {
-        alert(lastPlayer().name + " wins!");
-        gameOver = true;
-      }
-      // CHECK COL 2
-      if (boardArray[1] === boardArray[4] && boardArray[1] === boardArray[7]) {
-        alert(lastPlayer().name + " wins!");
-        gameOver = true;
-      }
-      // CHECK COL 3
-      if (boardArray[2] === boardArray[5] && boardArray[2] === boardArray[8]) {
-        alert(lastPlayer().name + " wins!");
-        gameOver = true;
-      }
-      // CHECK DIAG \
-      if (boardArray[0] === boardArray[4] && boardArray[0] === boardArray[8]) {
-        alert(lastPlayer().name + " wins!");
-        gameOver = true;
-      }
-      // CHECK DIAG /
-      if (boardArray[2] === boardArray[4] && boardArray[2] === boardArray[6]) {
-        alert(lastPlayer().name + " wins!");
-        gameOver = true;
-      }
-    }
-  }
-
-  function stopGame () {
-
   }
 
   function resetGame () {
