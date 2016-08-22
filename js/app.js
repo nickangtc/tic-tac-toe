@@ -1,4 +1,8 @@
 console.log('is js working?');
+// bugs detected:
+// 1P: user can make another move before Blue finishes his
+// bothmodes: user can still make moves after gameover
+// bothmodes: shows diaglogue box before grid box is updated
 
 document.addEventListener('DOMContentLoaded', function() {
 
