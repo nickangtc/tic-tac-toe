@@ -3,6 +3,7 @@ console.log('is js working?');
 // 1P: user can make another move before Blue finishes his
 // bothmodes: user can still make moves after gameover
 // bothmodes: shows diaglogue box before grid box is updated
+// remove Alerts and replace with status messages
 
 document.addEventListener('DOMContentLoaded', function() {
   // CLICK EVENT LISTENERS FOR 'START' AND 'RESET' BUTTONS.
