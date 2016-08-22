@@ -1,9 +1,11 @@
 console.log('is js working?');
 
 document.addEventListener('DOMContentLoaded', function() {
-
+  // CLICK EVENT LISTENERS FOR 'START' AND 'RESET' BUTTONS.
   document.getElementById("start-button").addEventListener("click", startGame);
   document.getElementById("reset-button").addEventListener("click", resetGame);
+
+  // DISPLAYS INSTRUCTIONS FOR CHOSEN MODE WHEN DIFFERENT RADIO BUTTON IS SELECTED
   document.getElementById("vsBlue").addEventListener("click", function() {
     document.getElementById("show-turn").textContent = "Play against Blue, our AI. Click Start to begin!";
   });
@@ -11,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("show-turn").textContent = "Grab a friend, click Start to begin!";
   });
 
+  // CLICK EVENT LISTENERS FOR EACH BOX IN THE 9-BOX GAME GRID.
   document.getElementById("box1").addEventListener("click", function () {
     makeMove("box1");
   });
@@ -39,13 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
     makeMove("box9");
   });
 
-
-  var player1 = {
-    symbol: "O",
-  };
-  var player2 = {
-    symbol: "X"
-  };
   var gameStarted = false;
   var gameOver = false;
   var round = 1;
@@ -61,7 +57,14 @@ document.addEventListener('DOMContentLoaded', function() {
     box8: 8,
     box9: 9
   };
+  var player1 = {
+    symbol: "O"
+  };
+  var player2 = {
+    symbol: "X"
+  };
 
+  // CHECKS FOR USER-SELECTED MODE, RETURNS VALUE OF SELECTION.
   function checkMode() {
     var len = document.getElementById("select-mode").children.length;
     console.log("no. of radio buttons: " + len);
@@ -74,6 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // INITIALISES GAME BY ASKING FOR NAMES,
+  // AND MAKES BOXES CLICKABLE.
   function startGame () {
     console.log("inside startGame function");
     var mode = checkMode();
@@ -91,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // CHECKS WHOSE TURN IT IS
   function whoseTurn () {
     if (round % 2 === 0) {
       console.log("Player2's turn");
@@ -113,12 +119,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // UPDATES TURN DISPLAY 
   function updateTurnDisplay (player) {
     document.getElementById("show-turn").innerHTML = player.name + ", your turn (" + player.symbol + ")";
     console.log("player name: " + player.name);
   }
 
-  // FOR 2-PLAYER MODE ONLY
+  // FIRES EVERY TIME USER CLICKS A BOX
+  // USED IN BOTH 1-PLAYER AND 2-PLAYER MODES
   function makeMove(boxId) {
     console.log("inside makeMove function with " + boxId);
     console.log("class list of boxId " + document.getElementById(boxId).classList);
@@ -135,7 +143,6 @@ document.addEventListener('DOMContentLoaded', function() {
       else if (whoseTurn().symbol === "O") {
         updateTurnDisplay(player2);
         console.log("tile changed to O bg");
-        // document.getElementById(boxId).setAttribute("class", "o-symbol");
         document.getElementById(boxId).classList.add("o");
         boardArray[boxIndex[boxId] - 1] = "O";
         console.log(boardArray);
@@ -149,6 +156,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // CONTAINS ALL WINNING COMBINATIONS,
+  // ALERTS WHEN A PLAYER WINS,
+  // AND SETS GAMEOVER STATE
   function winOrLose() {
     switch (true) {
       // CHECK ROW 1
@@ -171,7 +181,6 @@ document.addEventListener('DOMContentLoaded', function() {
       alert(lastPlayer().name + " wins!");
       gameOver = true;
       break;
-
       // CHECK COL 2
       case (boardArray[1] === boardArray[4] && boardArray[1] === boardArray[7]):
       alert(lastPlayer().name + " wins!");
@@ -192,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
       alert(lastPlayer().name + " wins!");
       gameOver = true;
       break;
-      // IF ROUND 10
+      // IF ROUND 10 = DRAW
       case (round === 10):
       console.log("it's a draw match");
       alert("And... it's a draw. Click RESET and Start for a rematch!");
@@ -201,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // ACTIVATED BY RESET BUTTON, RESETS GAME TO START STATE.
   function resetGame () {
     console.log("reset button clicked");
     var len = document.getElementsByClassName("box").length;
@@ -237,6 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, delay);
   }
 
+  // Generate random number in a pre-specified range.
   function randomIntFromInterval(min,max) {
     return Math.floor(Math.random()*(max-min+1)+min);
   }
