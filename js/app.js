@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var gameStarted = false;
   var gameOver = false;
   var round = 1;
-  var boardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  var boardArray = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   var boxIndex = {
     box1: 1,
     box2: 2,
@@ -63,10 +63,12 @@ document.addEventListener('DOMContentLoaded', function() {
     box9: 9
   };
   var player1 = {
-    symbol: "O"
+    symbol: "O",
+    token: 1
   };
   var player2 = {
-    symbol: "X"
+    symbol: "X",
+    token: -1
   };
 
   // CHECKS FOR USER-SELECTED MODE, RETURNS VALUE OF SELECTION.
@@ -140,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateTurnDisplay(player1);
         console.log("tile changed to X bg");
         document.getElementById(boxId).classList.add("x");
-        boardArray[boxIndex[boxId] - 1] = "X";
+        boardArray[boxIndex[boxId] - 1] = player1.token;
         console.log(boardArray);
         round++;
         winOrLose();
@@ -149,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateTurnDisplay(player2);
         console.log("tile changed to O bg");
         document.getElementById(boxId).classList.add("o");
-        boardArray[boxIndex[boxId] - 1] = "O";
+        boardArray[boxIndex[boxId] - 1] = player2.token;
         console.log(boardArray);
         round++;
         winOrLose();
@@ -227,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
     gameStarted = false;
     gameOver = false;
     round = 1;
-    boardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    boardArray = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     document.getElementById("show-turn").textContent = "Ready for a rematch?";
   }
 
@@ -245,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var boxId = "box" + randomInt;
         updateTurnDisplay(player1);
         document.getElementById(boxId).classList.add("x");
-        boardArray[boxIndex[boxId] - 1] = "X";
+        boardArray[boxIndex[boxId] - 1] = player2.token;
         round++;
         winOrLose();
       }
