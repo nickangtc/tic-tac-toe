@@ -163,11 +163,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  function announceWin() {
+    alert(lastPlayer().name + " wins!");
+    gameOver = true;
+  }
+
   // CONTAINS ALL WINNING COMBINATIONS,
   // ALERTS WHEN A PLAYER WINS,
   // AND SETS GAMEOVER STATE
   function winOrLose() {
+    var topRow = boardArray[0] + boardArray [1] + boardArray[2];
+    var midRow = boardArray[3] + boardArray [4] + boardArray[5];
+    var bottomRow = boardArray[6] + boardArray [7] + boardArray[8];
+
+    var leftCol = boardArray[0] + boardArray [3] + boardArray[6];
+    var midCol = boardArray[1] + boardArray [4] + boardArray[7];
+    var rightCol = boardArray[2] + boardArray [5] + boardArray[8];
+
+    var diag08 = boardArray[0] + boardArray [4] + boardArray[8];
+    var diag26 = boardArray[2] + boardArray [4] + boardArray[6];
     switch (true) {
+      // CHECK ROW 1
+      case (topRow === 3 || topRow === -3):
+      return announceWin();
+      // CONTINUE HERE!!!
+      // !!!!!
+      // !!!!!!!!
+
       // CHECK ROW 1
       case (boardArray[0] === boardArray[1] && boardArray[0] === boardArray[2]):
       alert(lastPlayer().name + " wins!");
@@ -236,22 +258,19 @@ document.addEventListener('DOMContentLoaded', function() {
   // THE BRAIN OF 'BLUE', THE COMPUTER OPPONENT
   // FOR 1-PLAYER VS COMPUTER MODE
   function blueMove () {
-    var randomInt = randomIntFromInterval(1,9); // generate random number 1-9
-    while (boardArray.includes(randomInt) === false) { // corresponding box must not be clicked before
-      randomInt = randomIntFromInterval(1,9);
-    }
-    var delay = randomIntFromInterval(1000, 3000); // 1-3 seconds to simulate Blue thinking
-    setTimeout(function() {
-      // Blue makes a random move.
-      if (boardArray.includes(randomInt)) {
+    var randomInt = randomIntFromInterval(0,8); // generate random number 0-8
+    if (boardArray[randomInt] === 0) {  // box is not yet clicked
+      var delay = randomIntFromInterval(1000, 3000); // 1-3 seconds to simulate Blue thinking
+      setTimeout(function() {
+        // Blue makes a random move.
         var boxId = "box" + randomInt;
         updateTurnDisplay(player1);
         document.getElementById(boxId).classList.add("x");
         boardArray[boxIndex[boxId] - 1] = player2.token;
         round++;
         winOrLose();
-      }
-    }, delay);
+      }, delay);
+    }
   }
 
   // Generate random number in a pre-specified range.
